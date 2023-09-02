@@ -50,15 +50,25 @@ def test_loop(dataloader, model, loss_fn):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--train-dataset-csv", help = "the name of the training csv file")
-    parser.add_argument("--test-dataset-csv", help = "the name of the testing csv file")
+    parser.add_argument("--train-dataset-csv", type = str, help = "name of the training csv file")
+    parser.add_argument("--test-dataset-csv", type = str, help = "name of the testing csv file")
+    parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 64)
+    parser.add_argument("--learning-rate", type = float, help = "learning rate used in training",  
+                        default = 1e-3)
+    parser.add_argument("--epochs", type = int, help = "nume of epochs used in training", 
+                        default = 10)
+
+    # Load the parameters
     args = parser.parse_args()
     training_dataset = ContactDataSet(
         csv_file = args.train_dataset_csv, root_dir="./data", transform=None)
     test_dataset = ContactDataSet(
         csv_file = args.test_dataset_csv, root_dir="./data", transform=None)
-    learning_rate = 1e-3
-    batch_size = 64
+    learning_rate = args.learning_rate
+    batch_size = args.batch_size
+    epochs = args.epochs
+
+    # Create the loss function and the training/testing DataLoaders
     loss_fn = nn.CrossEntropyLoss()
     train_dataloader = DataLoader(
         training_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
@@ -67,7 +77,6 @@ def main():
     model = NeuralNetwork()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
-    epochs = 10
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
         train_loop(train_dataloader, model, loss_fn, optimizer)
