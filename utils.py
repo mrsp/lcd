@@ -46,3 +46,16 @@ def merge_slip_with_fly(labels):
         if labels[i] == 2:
             labels[i] = 1
     return labels
+
+# Normalizes data in [-1, 1]
+def normalize(din, dmax):
+    if(dmax != 0):
+        dout =  np.abs(din/dmax)
+    else:
+        dout =  np.zeros((np.size(din)))
+    return dout
+
+# Removes list of features ( for point feet robots)
+def remove_features(features_to_remove,dataset):
+  dataset = np.delete(dataset,features_to_remove,axis=1)
+  return dataset
