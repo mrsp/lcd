@@ -54,12 +54,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--train-dataset-csv", type = str, help = "name of the training csv file")
     parser.add_argument("--test-dataset-csv", type = str, help = "name of the testing csv file")
-    parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 64)
+    parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 16)
     parser.add_argument("--learning-rate", type = float, help = "learning rate used in training",  
-                        default = 1e-2)
-    parser.add_argument("--epochs", type = int, help = "nume of epochs used in training", 
+                        default = 1e-3)
+    parser.add_argument("--epochs", type = int, help = "number of epochs used in training", 
                         default = 20)
-
+    parser.add_argument("--add-noise", help = "adds noise to the dataset", default = False, 
+                        action = "store_true")
     # Load the parameters
     args = parser.parse_args()
     training_dataset = ContactDataSet(

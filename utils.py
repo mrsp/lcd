@@ -59,3 +59,12 @@ def normalize(din, dmax):
 def remove_features(features_to_remove,dataset):
   dataset = np.delete(dataset,features_to_remove,axis=1)
   return dataset
+
+# Adds gaussian noise to data
+def add_noise(data,std):
+  mu = 0  # mean and standard deviation
+  s = np.random.normal(mu, std, data.shape[0])
+  for f in range(0,data.shape[1]):
+    for i in range(0,data.shape[0]):
+      data[i,f] = data[i,f] + s[i]
+  return data
