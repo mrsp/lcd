@@ -54,7 +54,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--train-dataset-csv", type = str, help = "name of the training csv file")
     parser.add_argument("--test-dataset-csv", type = str, help = "name of the testing csv file")
-    parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 16)
+    parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 128)
     parser.add_argument("--learning-rate", type = float, help = "learning rate used in training",  
                         default = 1e-3)
     parser.add_argument("--epochs", type = int, help = "number of epochs used in training", 
@@ -79,7 +79,7 @@ def main():
     test_dataloader = DataLoader(
         test_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
     model = NeuralNetwork()
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
     input, labels = next(iter(train_dataloader))
     writer.add_graph(model, input)
     writer.close()
