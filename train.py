@@ -37,18 +37,17 @@ def test_loop(dataloader, model, loss_fn):
     num_batches = len(dataloader)
     test_loss, correct = 0, 0
 
-    # Evaluating the model with torch.no_grad() ensures that no gradients are computed during test mode
+    # Evaluating the model with torch.inference_mode() ensures that no gradients are computed during test mode
     # also serves to reduce unnecessary gradient computations and memory usage for tensors with requires_grad=True
-    with torch.no_grad():
+    with torch.inference_mode():
         for X, y in dataloader:
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+            correct += (pred.argmax(1) == y.argmax(1)).sum().item()
 
     test_loss /= num_batches
     correct /= size
-    print(
-        f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -56,7 +55,7 @@ def main():
     parser.add_argument("--test-dataset-csv", type = str, help = "name of the testing csv file")
     parser.add_argument("--batch-size", type = int, help = "dataset batch size", default = 128)
     parser.add_argument("--learning-rate", type = float, help = "learning rate used in training",  
-                        default = 1e-3)
+                        default = 1e-2)
     parser.add_argument("--epochs", type = int, help = "number of epochs used in training", 
                         default = 20)
     parser.add_argument("--add-noise", help = "adds noise to the dataset", default = False, 
@@ -73,7 +72,7 @@ def main():
 
     writer = SummaryWriter('./runs/' + args.train_dataset_csv.removesuffix(".csv"))
     # Create the loss function and the training/testing DataLoaders
-    loss_fn = nn.CrossEntropyLoss()
+    loss_fn = nn.BCELoss()
     train_dataloader = DataLoader(
         training_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
     test_dataloader = DataLoader(

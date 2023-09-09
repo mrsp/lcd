@@ -1,3 +1,4 @@
+import torch
 import numpy as np
 
 from torch.utils.data import Dataset
@@ -43,8 +44,8 @@ class ContactDataSet(Dataset):
             dataset[:,i] = normalize(dataset[:,i],np.max(abs(dataset[:,i])))
 
         dataset, labels = remove_outliers(dataset, labels)
-        self.data = dataset
-        self.labels = labels
+        self.data = torch.from_numpy(dataset).type(torch.float32)
+        self.labels = torch.nn.functional.one_hot(torch.from_numpy(labels).type(torch.int64), num_classes=2).type(torch.float32)
         self.root_dir = root_dir
         self.transform = transform
 
@@ -52,4 +53,4 @@ class ContactDataSet(Dataset):
         return len(self.labels)
 
     def __getitem__(self, idx):
-        return self.data[idx, :], int(self.labels[idx])
+        return self.data[idx, :], self.labels[idx, :]

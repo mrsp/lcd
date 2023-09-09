@@ -14,7 +14,8 @@ class NeuralNetwork(nn.Module):
             nn.Linear(64, 128),
             nn.ReLU(),
             nn.Linear(128, 2),
-            nn.Sigmoid())
+            nn.Sigmoid()
+        )
 
     def forward(self, x):
         return self.architecture(x)
