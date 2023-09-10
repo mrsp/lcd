@@ -45,7 +45,8 @@ class ContactDataSet(Dataset):
 
         dataset, labels = remove_outliers(dataset, labels)
         self.data = torch.from_numpy(dataset).type(torch.float32)
-        self.labels = torch.nn.functional.one_hot(torch.from_numpy(labels).type(torch.int64), num_classes=2).type(torch.float32)
+        self.labels = torch.nn.functional.one_hot(torch.from_numpy(labels).type(torch.int64), 
+                                                  num_classes=2).type(torch.float32)
         self.root_dir = root_dir
         self.transform = transform
 
