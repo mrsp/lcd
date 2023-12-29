@@ -16,7 +16,7 @@ To train, deploy, and visualize an LCD model the following requirements must be 
 * pip install scipy-learn
 * pip install pandas
 * pip install matplotlib
-* git clone https://github.com/mrsp/lcd_core.git
+* git clone https://github.com/mrsp/lcd.git
 
 ## Training and Testing procedure
 
