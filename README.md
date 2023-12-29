@@ -1,4 +1,4 @@
-# LCD
+# Legged Contact Detection (LCD)
 
 LCD is a quality of contact estimation supervised deep learning framework for legged robots. It utilizes leg Force/Torque and IMU measurements to predict the probability of Stable Contact (SC) and Unstable Contact (UC). LCD also works with reduced features (Fz + IMU) in case the robot has point feet, nevertheless the results are slightly worse on datasets with extremely low friction coefficient surfaces (< 0.07). Additionally, LCD generalizes across platforms, meaning it is able to predict the quality of contact on walking gaits for a robot A even though it was not trained using data from that particular robot. This indicates that LCD learns some platform-invariant features to classify the quality of contact in walking gaits.
 
@@ -16,7 +16,7 @@ To train, deploy, and visualize an LCD model the following requirements must be 
 * pip install scipy-learn
 * pip install pandas
 * pip install matplotlib
-* git clone https://github.com/mrsp/lcd_core.git
+* git clone https://github.com/mrsp/lcd.git
 
 ## Training and Testing procedure
 
@@ -56,3 +56,9 @@ For more information regarding the LCD's theory and implementation kindly check 
 
 [Robust Contact State Estimation in Humanoid Walking Gaits](
 https://ieeexplore.ieee.org/document/9981354)
+
+Video presentation available at:
+
+[![Watch the video](img/lcd-talos.png)](https://www.youtube.com/watch?v=csUIadkT7OM)
+
+
