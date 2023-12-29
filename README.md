@@ -33,11 +33,11 @@ After training one can visualize training and testing performance metrics with:
 Indicative training on the `ATLAS_50k_mixedFriction` dataset is illustrated below where the accuracy
 and loss are shown:
 
-![Screenshot](img/training.png)
+![Screenshot](img/lcd-training.png)
 
 In addition, the confusion matrix is depicted for testing on the `ATLAS_21k_02ground` dataset:
 
-![Screenshot](img/confusion_matrix.png)
+![Screenshot](img/lcd-confusion_matrix.png)
 
 
 ## Results
