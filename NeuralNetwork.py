@@ -1,9 +1,13 @@
 from torch import nn
 
+
 class NeuralNetwork(nn.Module):
+    """
+        Creates the LCD model architecture and implements the forward pass function.
+    """
     def __init__(self):
         super().__init__()
-        self.architecture = nn.Sequential(
+        self.model = nn.Sequential(
             nn.Linear(12, 128), 
             nn.ReLU(),
             nn.Linear(128, 128),
@@ -18,4 +22,4 @@ class NeuralNetwork(nn.Module):
         )
 
     def forward(self, x):
-        return self.architecture(x)
+        return self.model(x)
