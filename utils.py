@@ -95,7 +95,6 @@ def normalize(din, dmax):
         dout = np.zeros((np.size(din)))
     return dout
 
-# Removes list of features (for point feet robots)
 def remove_features(features_to_remove, dataset):
     """
         Removes a list of features in the dataset
