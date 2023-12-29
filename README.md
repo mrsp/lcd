@@ -61,4 +61,5 @@ Video presentation available at:
 
 [![Watch the video](img/lcd-talos.png)](https://www.youtube.com/watch?v=csUIadkT7OM)
 
-
+## License
+[MIT](LICENSE)
